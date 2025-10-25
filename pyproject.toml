@@ -9,10 +9,10 @@ description = "A comprehensive library for Persian (Jalali), Gregorian, and Hijr
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Pouya", email = "pouya@example.com"}
+    {name = "Pouya Kia", email = "kiaa.pouya@gmail.com"}
 ]
 maintainers = [
-    {name = "Pouya", email = "pouya@example.com"}
+    {name = "Pouya Kia", email = "kiaa.pouya@gmail.com"}
 ]
 keywords = ["calendar", "persian", "jalali", "gregorian", "hijri", "date", "conversion", "dimension"]
 classifiers = [
@@ -52,11 +52,11 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/pouya/multi-calendar-dimension"
+Homepage = "https://github.com/pouya-kia/multi-calendar-dimension"
 Documentation = "https://multi-calendar-dimension.readthedocs.io"
-Repository = "https://github.com/pouya/multi-calendar-dimension.git"
-Issues = "https://github.com/pouya/multi-calendar-dimension/issues"
-Changelog = "https://github.com/pouya/multi-calendar-dimension/blob/main/CHANGELOG.md"
+Repository = "https://github.com/pouya-kia/multi-calendar-dimension.git"
+Issues = "https://github.com/pouya-kia/multi-calendar-dimension/issues"
+Changelog = "https://github.com/pouya-kia/multi-calendar-dimension/blob/main/CHANGELOG.md"
 
 [project.scripts]
 multi-calendar = "multi_calendar_dimension.cli:main"

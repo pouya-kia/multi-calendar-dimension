@@ -152,4 +152,4 @@ The library includes comprehensive tests:
 
 **Thank you for using Multi-Calendar Dimension Library!**
 
-For more information, visit: https://github.com/yourusername/multi-calendar-dimension
+For more information, visit: https://github.com/pouya-kia/multi-calendar-dimension

@@ -19,7 +19,7 @@ Security vulnerabilities should be reported privately to avoid potential harm.
 
 ### 2. Email us directly
 
-Send an email to: [security@yourdomain.com] (replace with actual email)
+Send an email to: kiaa.pouya@gmail.com
 
 Include the following information:
 - Description of the vulnerability
@@ -71,4 +71,4 @@ Security updates will be released as patch versions (e.g., 1.0.1, 1.0.2) and wil
 
 ## Contact
 
-For security-related questions or concerns, please contact us at: [security@yourdomain.com]
+For security-related questions or concerns, please contact us at: kiaa.pouya@gmail.com

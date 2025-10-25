@@ -15,12 +15,12 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="multi-calendar-dimension",
     version="1.0.0",
-    author="Pouya",
-    author_email="pouya@example.com",
+    author="Pouya Kia",
+    author_email="kiaa.pouya@gmail.com",
     description="A comprehensive library for Persian (Jalali), Gregorian, and Hijri calendar operations",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pouya/multi-calendar-dimension",
+    url="https://github.com/pouya-kia/multi-calendar-dimension",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",

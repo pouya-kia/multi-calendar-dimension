@@ -5,9 +5,10 @@ This file lists the contributors to the Multi-Calendar Dimension Library.
 ## Core Contributors
 
 ### Lead Developer
-- **Pouya** - Project creator and lead developer
-  - Email: [your-email@domain.com]
-  - GitHub: [@yourusername](https://github.com/yourusername)
+- **Pouya Kia** - Project creator and lead developer
+  - Email: kiaa.pouya@gmail.com
+  - GitHub: [@pouya-kia](https://github.com/pouya-kia)
+  - LinkedIn: [Pouya Kia](https://www.linkedin.com/in/pouya-kia/)
 
 ## Contributors
 

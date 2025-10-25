@@ -1,14 +1,15 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Developer"
+- family-names: "Kia"
   given-names: "Pouya"
-  email: "your-email@domain.com"
-  github: "https://github.com/yourusername"
+  email: "kiaa.pouya@gmail.com"
+  github: "https://github.com/pouya-kia"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "Multi-Calendar Dimension Library"
 version: "1.0.0"
 date-released: 2024-10-25
-url: "https://github.com/yourusername/multi-calendar-dimension"
+url: "https://github.com/pouya-kia/multi-calendar-dimension"
 license: MIT
 keywords:
   - "calendar"
@@ -25,9 +26,9 @@ preferred-citation:
   type: software
   title: "Multi-Calendar Dimension Library"
   authors:
-  - family-names: "Developer"
+  - family-names: "Kia"
     given-names: "Pouya"
   version: "1.0.0"
   date-released: 2024-10-25
-  url: "https://github.com/yourusername/multi-calendar-dimension"
+  url: "https://github.com/pouya-kia/multi-calendar-dimension"
   license: MIT
