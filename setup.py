@@ -9,8 +9,17 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 # Read requirements
-with open("requirements.txt", "r", encoding="utf-8") as fh:
-    requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+try:
+    with open("requirements.txt", "r", encoding="utf-8") as fh:
+        requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+except FileNotFoundError:
+    # Fallback requirements if requirements.txt is not found
+    requirements = [
+        "pandas>=2.0.0",
+        "openpyxl>=3.1.0", 
+        "skyfield>=1.46",
+        "numpy>=1.21.0",
+    ]
 
 setup(
     name="multi-calendar-dimension",
