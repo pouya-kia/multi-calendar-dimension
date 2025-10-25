@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Developer"
+  given-names: "Pouya"
+  email: "your-email@domain.com"
+  github: "https://github.com/yourusername"
+title: "Multi-Calendar Dimension Library"
+version: "1.0.0"
+date-released: 2024-10-25
+url: "https://github.com/yourusername/multi-calendar-dimension"
+license: MIT
+keywords:
+  - "calendar"
+  - "persian"
+  - "jalali"
+  - "gregorian"
+  - "hijri"
+  - "islamic"
+  - "date-conversion"
+  - "data-warehouse"
+  - "dimension-table"
+abstract: "A comprehensive Python library for multi-calendar date operations, supporting Persian (Jalali), Gregorian, and Hijri calendars with conversion functions, date dimension generation, and event/holiday data."
+preferred-citation:
+  type: software
+  title: "Multi-Calendar Dimension Library"
+  authors:
+  - family-names: "Developer"
+    given-names: "Pouya"
+  version: "1.0.0"
+  date-released: 2024-10-25
+  url: "https://github.com/yourusername/multi-calendar-dimension"
+  license: MIT
