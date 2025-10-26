@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2024-10-26
+
+### Changed
+- **BREAKING**: Replaced astronomical Hijri conversion with Umm al-Qura algorithm for improved accuracy
+- Updated `gregorian_to_hijri()` to use official Saudi Umm al-Qura calendar data
+- Updated `hijri_to_gregorian()` to use Umm al-Qura algorithm
+
+### Added
+- `get_hijri_month_name()` function for easy month name retrieval
+- `HIJRI_MONTH_NAMES` dictionary with Persian month names
+- `HIJRI_MONTH_NAMES_EN` dictionary with English month names
+- `ummalqura_data.py` module with official lunar calendar data
+- `persian_events_en` dictionary with English translations of Persian events
+
+### Improved
+- More accurate Hijri date conversion using official Saudi calendar
+- Faster conversion without astronomical calculations
+- Better month name handling for Hijri calendar
+- Complete bilingual support for Persian events
+
+### Removed
+- Dependency on `skyfield` for Hijri calculations (still kept for potential future use)
+
 ## [1.0.0] - 2024-10-25
 
 ### Added

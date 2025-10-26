@@ -1,28 +1,46 @@
 """
-Hijri (Islamic) calendar conversion functions
-تبدیل تاریخ قمری به میلادی و برعکس
+Hijri (Islamic) calendar conversion functions using Umm al-Qura algorithm
 """
 
+import math
 from typing import Tuple
-from skyfield.api import load
-import numpy as np
+from .ummalqura_data import UMMALQURA_DATA, get_index
+
+
+HIJRI_MONTH_NAMES = {
+    1: "محرم",
+    2: "صفر",
+    3: "ربیع‌الاول",
+    4: "ربیع‌الثانی",
+    5: "جمادی‌الاول",
+    6: "جمادی‌الثانی",
+    7: "رجب",
+    8: "شعبان",
+    9: "رمضان",
+    10: "شوال",
+    11: "ذی‌قعده",
+    12: "ذی‌حجه"
+}
+
+HIJRI_MONTH_NAMES_EN = {
+    1: "Muharram",
+    2: "Safar",
+    3: "Rabi' al-Awwal",
+    4: "Rabi' al-Thani",
+    5: "Jumada al-Ula",
+    6: "Jumada al-Thani",
+    7: "Rajab",
+    8: "Sha'ban",
+    9: "Ramadan",
+    10: "Shawwal",
+    11: "Dhu al-Qa'dah",
+    12: "Dhu al-Hijjah"
+}
 
 
 def is_hijri_leap(year: int) -> bool:
     """
     Check if a Hijri year is leap year
-    
-    Args:
-        year: Hijri year
-        
-    Returns:
-        True if leap year, False otherwise
-        
-    Example:
-        >>> is_hijri_leap(1445)
-        True
-        >>> is_hijri_leap(1446)
-        False
     """
     return ((11 * year + 14) % 30) < 11
 
@@ -30,66 +48,13 @@ def is_hijri_leap(year: int) -> bool:
 def hijri_year_days(year: int) -> int:
     """
     Get number of days in Hijri year
-    
-    Args:
-        year: Hijri year
-        
-    Returns:
-        355 for leap year, 354 for normal year
-        
-    Example:
-        >>> hijri_year_days(1445)
-        355
-        >>> hijri_year_days(1446)
-        354
     """
     return 355 if is_hijri_leap(year) else 354
 
 
-def gregorian_to_jd(gy: int, gm: int, gd: int) -> int:
+def gregorian_to_hijri(year: int, month: int, day: int) -> Tuple[int, int, int]:
     """
-    Convert Gregorian date to Julian Day Number
-    
-    Args:
-        gy: Gregorian year
-        gm: Gregorian month (1-12)
-        gd: Gregorian day (1-31)
-        
-    Returns:
-        Julian Day Number
-    """
-    a = (14 - gm) // 12
-    y = gy + 4800 - a
-    m = gm + 12 * a - 3
-    jd = gd + ((153 * m + 2) // 5) + 365 * y + (y // 4) - (y // 100) + (y // 400) - 32045
-    return jd
-
-
-def jd_to_hijri_tabular(jd: int) -> Tuple[int, int, int]:
-    """
-    Convert Julian Day Number to Hijri date using tabular algorithm
-    
-    Args:
-        jd: Julian Day Number
-        
-    Returns:
-        Tuple of (Hijri year, Hijri month, Hijri day)
-    """
-    jd = int(jd)
-    l = jd - 1948440 + 10632
-    n = (l - 1) // 10631
-    l = l - 10631 * n + 354
-    j = ((10985 - l) // 5316) * ((50 * l) // 17719) + (l // 5670) * ((43 * l) // 15238)
-    l = l - ((30 - j) // 15) * ((17719 * j) // 50) - (j // 16) * ((15238 * j) // 43) + 29
-    m = (24 * l) // 709
-    d = l - (709 * m) // 24
-    y = 30 * n + j - 30
-    return y, m, d
-
-
-def gregorian_to_hijri_astronomical(year: int, month: int, day: int) -> Tuple[int, int, int]:
-    """
-    Convert Gregorian date to Hijri using astronomical calculations
+    Convert Gregorian date to Hijri date using Umm al-Qura algorithm.
     
     Args:
         year: Gregorian year
@@ -98,89 +63,119 @@ def gregorian_to_hijri_astronomical(year: int, month: int, day: int) -> Tuple[in
         
     Returns:
         Tuple of (Hijri year, Hijri month, Hijri day)
-    """
-    # Load astronomical data
-    ts = load.timescale()
-    planets = load('de421.bsp')
-    earth, moon, sun = planets['earth'], planets['moon'], planets['sun']
-    
-    # Input time
-    t = ts.utc(year, month, day)
-    
-    # Celestial positions
-    e = earth.at(t)
-    moon_lon = e.observe(moon).apparent().ecliptic_latlon()[1].degrees
-    sun_lon = e.observe(sun).apparent().ecliptic_latlon()[1].degrees
-
-    # Moon-sun elongation angle (degrees)
-    elongation = (moon_lon - sun_lon) % 360
-
-    # Moon age (days since conjunction)
-    moon_age = (elongation / 360.0) * 29.53058867
-    day_in_hijri_month = int(moon_age)
-    if day_in_hijri_month == 0:
-        day_in_hijri_month = 30  # Back to previous month
-
-    # Estimate Hijri month and year
-    # Difference between Gregorian date and Hijri epoch (July 16, 622 CE)
-    jd_days = (t.utc_datetime() - ts.utc(622, 7, 16).utc_datetime()).days
-    hijri_months_passed = int(jd_days / 29.53058867)
-    hijri_year = 1 + hijri_months_passed // 12
-    hijri_month = hijri_months_passed % 12
-
-    return hijri_year, hijri_month + 1, day_in_hijri_month
-
-
-def gregorian_to_hijri(gy: int, gm: int, gd: int) -> Tuple[int, int, int]:
-    """
-    Convert Gregorian date to Hijri date using astronomical calculations
-    
-    Args:
-        gy: Gregorian year
-        gm: Gregorian month (1-12)
-        gd: Gregorian day (1-31)
-        
-    Returns:
-        Tuple of (Hijri year, Hijri month, Hijri day)
         
     Example:
-        >>> gregorian_to_hijri(2024, 3, 20)
-        (1445, 9, 10)
+        >>> gregorian_to_hijri(2023, 7, 19)
+        (1445, 1, 1)
     """
-    return gregorian_to_hijri_astronomical(gy, gm, gd)
+    day = int(day)
+    m = int(month)
+    y = int(year)
+
+    if m < 3:
+        y -= 1
+        m += 12
+
+    a = math.floor(y / 100.)
+    jgc = a - math.floor(a / 4.) - 2
+
+    cjdn = math.floor(365.25 * (y + 4716)) + math.floor(30.6001 * (m + 1)) + day - jgc - 1524
+
+    mcjdn = cjdn - 2400000
+
+    index = get_index(mcjdn)
+
+    iln = index + 16260
+    ii = math.floor((iln - 1) / 12)
+    iy = ii + 1
+    im = iln - 12 * ii
+    id_ = mcjdn - UMMALQURA_DATA[index - 1] + 1
+    
+    return int(iy), int(im), int(id_)
 
 
-def hijri_to_gregorian(hy: int, hm: int, hd: int) -> Tuple[int, int, int]:
+def hijri_to_gregorian(year: int, month: int, day: int) -> Tuple[int, int, int]:
     """
-    Convert Hijri date to Gregorian date
+    Convert Hijri date to Gregorian date using Umm al-Qura algorithm.
     
     Args:
-        hy: Hijri year
-        hm: Hijri month (1-12)
-        hd: Hijri day (1-30)
+        year: Hijri year
+        month: Hijri month (1-12)
+        day: Hijri day (1-30)
         
     Returns:
         Tuple of (Gregorian year, Gregorian month, Gregorian day)
         
     Example:
-        >>> hijri_to_gregorian(1445, 9, 10)
-        (2024, 3, 20)
+        >>> hijri_to_gregorian(1445, 1, 1)
+        (2023, 7, 19)
     """
-    # Convert Hijri to Julian Day Number first
-    # This is a simplified conversion - for more accuracy, 
-    # we would need the reverse of the astronomical calculation
-    jd = 1948440 + (hy - 1) * 354 + (hy - 1) // 30 * 11 + (hm - 1) * 29 + hd
+    year = int(year)
+    month = int(month)
+    day = int(day)
     
-    # Convert Julian Day Number to Gregorian
-    a = jd + 32044
-    b = (4 * a + 3) // 146097
-    c = a - (146097 * b) // 4
-    d = (4 * c + 3) // 1461
-    e = c - (1461 * d) // 4
-    m = (5 * e + 2) // 153
+    iy = year
+    im = month
+    id_ = day
+    ii = iy - 1
+    iln = (ii * 12) + 1 + (im - 1)
+    i = iln - 16260
+    mcjdn = id_ + UMMALQURA_DATA[i - 1] - 1
+    cjdn = mcjdn + 2400000
     
-    day = e - (153 * m + 2) // 5 + 1
-    month = m + 3 - 12 * (m // 10)
-    year = 100 * b + d - 4800 + (m // 10)
+    return julian_to_gregorian(cjdn)
+
+
+def julian_to_gregorian(julian_date: float) -> Tuple[int, int, int]:
+    """
+    Convert Julian Day Number to Gregorian date.
     
-    return year, month, day
+    Args:
+        julian_date: Julian Day Number
+        
+    Returns:
+        Tuple of (Gregorian year, Gregorian month, Gregorian day)
+    """
+    z = math.floor(julian_date + 0.5)
+    a = math.floor((z - 1867216.25) / 36524.25)
+    a = z + 1 + a - math.floor(a / 4)
+    b = a + 1524
+    c = math.floor((b - 122.1) / 365.25)
+    d = math.floor(365.25 * c)
+    e = math.floor((b - d) / 30.6001)
+    day = b - d - math.floor(e * 30.6001)
+
+    if e > 13.5:
+        month = e - 13
+    else:
+        month = e - 1
+    if month > 2.5:
+        year = c - 4716
+    else:
+        year = c - 4715
+    if year <= 0:
+        year -= 1
+        
+    return int(year), int(month), int(day)
+
+
+def get_hijri_month_name(month: int, english: bool = False) -> str:
+    """
+    Get Hijri month name in Persian or English.
+    
+    Args:
+        month: Hijri month number (1-12)
+        english: If True, return English name, otherwise Persian
+        
+    Returns:
+        Month name string
+        
+    Example:
+        >>> get_hijri_month_name(1)
+        'محرم'
+        >>> get_hijri_month_name(1, english=True)
+        'Muharram'
+    """
+    if english:
+        return HIJRI_MONTH_NAMES_EN.get(month, "")
+    return HIJRI_MONTH_NAMES.get(month, "")

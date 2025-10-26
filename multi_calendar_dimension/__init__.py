@@ -6,9 +6,9 @@ A comprehensive library for Persian (Jalali), Gregorian, and Hijri calendar oper
 including date conversion, dimension generation, and current date information.
 """
 
-__version__ = "1.0.0"
-__author__ = "Pouya"
-__email__ = "pouya@example.com"
+__version__ = "1.0.1"
+__author__ = "Pouya Kia"
+__email__ = "kiaa.pouya@gmail.com"
 
 # Main classes (lazy import to avoid dependency issues)
 def _import_generator_classes():
@@ -30,7 +30,10 @@ from .converters.jalali import (
 from .converters.hijri import (
     gregorian_to_hijri,
     hijri_to_gregorian,
-    is_hijri_leap
+    is_hijri_leap,
+    get_hijri_month_name,
+    HIJRI_MONTH_NAMES,
+    HIJRI_MONTH_NAMES_EN
 )
 
 from .converters.cross import (
@@ -60,6 +63,9 @@ __all__ = [
     'gregorian_to_hijri',
     'hijri_to_gregorian',
     'is_hijri_leap',
+    'get_hijri_month_name',
+    'HIJRI_MONTH_NAMES',
+    'HIJRI_MONTH_NAMES_EN',
     
     # Cross converters
     'jalali_to_hijri',
