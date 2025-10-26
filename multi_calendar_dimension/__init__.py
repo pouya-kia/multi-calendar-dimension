@@ -48,6 +48,9 @@ from .events import (
     hijri_events, hijri_events_en, hijri_holidays
 )
 
+# Utilities
+from .utils import is_iranian_holiday, get_all_holidays_for_jalali_date
+
 __all__ = [
     # Main classes (lazy loaded)
     'DateDimensionGenerator',
@@ -82,4 +85,8 @@ __all__ = [
     'hijri_events',
     'hijri_events_en',
     'hijri_holidays',
+    
+    # Utilities
+    'is_iranian_holiday',
+    'get_all_holidays_for_jalali_date',
 ]
