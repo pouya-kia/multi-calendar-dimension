@@ -6,7 +6,7 @@ A comprehensive library for Persian (Jalali), Gregorian, and Hijri calendar oper
 including date conversion, dimension generation, and current date information.
 """
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 __author__ = "Pouya Kia"
 __email__ = "kiaa.pouya@gmail.com"
 
