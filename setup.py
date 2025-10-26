@@ -23,7 +23,7 @@ except FileNotFoundError:
 
 setup(
     name="multi-calendar-dimension",
-    version="1.0.1",
+    version="1.0.2",
     author="Pouya Kia",
     author_email="kiaa.pouya@gmail.com",
     description="A comprehensive library for Persian (Jalali), Gregorian, and Hijri calendar operations",

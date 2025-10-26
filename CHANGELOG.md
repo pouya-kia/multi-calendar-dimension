@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2024-10-26
+
+### Added
+- `is_iranian_holiday()` function to check if a Persian date is an official holiday
+- `get_all_holidays_for_jalali_date()` for comprehensive holiday information
+- Holiday checker utilities that recognize both Persian and Hijri holidays
+- Example 8 showing Iranian holiday checking
+- Support for checking Hijri holidays in Persian calendar context
+
+### Improved
+- Better integration of Hijri holidays with Persian calendar
+- Comprehensive holiday detection across all calendar systems
+
 ## [1.0.1] - 2024-10-26
 
 ### Changed
