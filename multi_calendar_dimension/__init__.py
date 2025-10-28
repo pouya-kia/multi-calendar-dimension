@@ -6,12 +6,12 @@ A comprehensive library for Persian (Jalali), Gregorian, and Hijri calendar oper
 including date conversion, dimension generation, and current date information.
 """
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 __author__ = "Pouya Kia"
 __email__ = "kiaa.pouya@gmail.com"
 
 # Main classes
-from .generator.dimension import DateDimensionGenerator
+from .generator.dimension import DateDimensionGenerator, DateDimensionConfig
 from .generator.range_generator import DateRangeGenerator, DateRangeConfig, CalendarType
 from .current.now import CurrentDate
 
@@ -49,6 +49,7 @@ from .utils import is_iranian_holiday, get_all_holidays_for_jalali_date
 __all__ = [
     # Main classes
     'DateDimensionGenerator',
+    'DateDimensionConfig',
     'DateRangeGenerator',
     'DateRangeConfig',
     'CalendarType',

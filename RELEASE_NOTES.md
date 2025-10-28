@@ -1,5 +1,35 @@
 # Release Notes
 
+## Version 1.0.5 - Complete Export Fix (2025-10-28)
+
+### 🐛 Bug Fixes
+
+#### Missing Export Fix
+- **Fixed**: `DateDimensionConfig` was not exported in `__init__.py`
+- **Added**: Complete export of all Config classes
+- **Impact**: Users can now import all necessary classes without errors
+
+### 📝 Changes
+
+```python
+# Now all Config classes work correctly:
+from multi_calendar_dimension import (
+    DateDimensionGenerator,
+    DateDimensionConfig,      # ✅ Now exported!
+    DateRangeGenerator,
+    DateRangeConfig,
+    CalendarType
+)
+```
+
+### ✅ Verified
+
+- All imports tested and working
+- Complete guide notebook updated
+- Test suite passes (11/13 tests)
+
+---
+
 ## Version 1.0.4 - Bug Fix Release (2025-10-28)
 
 ### 🐛 Bug Fixes
