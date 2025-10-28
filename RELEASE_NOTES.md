@@ -1,5 +1,47 @@
 # Release Notes
 
+## Version 1.0.4 - Bug Fix Release (2025-10-28)
+
+### 🐛 Bug Fixes
+
+#### Import Error Fix
+- **Fixed**: `DateRangeGenerator` import error that prevented users from importing the class
+- **Changed**: Converted lazy imports to direct imports in `__init__.py`
+- **Added**: `DateRangeConfig` and `CalendarType` to public API exports
+- **Impact**: Users can now successfully import and use `DateRangeGenerator`
+
+### 📝 Changes
+
+```python
+# Now works correctly:
+from multi_calendar_dimension import DateRangeGenerator, DateRangeConfig, CalendarType
+```
+
+### ✨ Improvements
+
+- Enhanced public API accessibility
+- Better module initialization
+- More intuitive import structure
+
+### 🔧 Technical Details
+
+Before this fix, attempting to import `DateRangeGenerator` would result in:
+```
+ImportError: cannot import name 'DateRangeGenerator' from 'multi_calendar_dimension'
+```
+
+This version resolves the issue by properly exposing all generator classes and their dependencies.
+
+---
+
+## Version 1.0.3 - Maintenance Release (2024-10-26)
+
+### 🔧 Minor Updates
+- Documentation improvements
+- Code quality enhancements
+
+---
+
 ## Version 1.0.0 - Initial Release (2024-10-25)
 
 ### 🎉 First Public Release

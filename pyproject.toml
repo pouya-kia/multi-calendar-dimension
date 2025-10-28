@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multi-calendar-dimension"
-version = "1.0.3"
+version = "1.0.4"
 description = "A comprehensive library for Persian (Jalali), Gregorian, and Hijri calendar operations including date conversion, dimension generation, and current date information"
 readme = "README.md"
 license = {text = "MIT"}
